@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebService.DataAccessLayer;
@@ -35,5 +36,31 @@ namespace WebService.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetClients), new { id = clientInfo.Id }, clientInfo);
         }
+
+        [HttpPost("jobdone")]
+
+        public async Task<IActionResult> JobDone([FromBody] JobDoneRequest request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.IPAddress) || request.Port == 0)
+                return BadRequest("Invalid request.");
+
+            var client = await _context.Clients
+                .FirstOrDefaultAsync(c => c.IPAddress == request.IPAddress && c.Port == request.Port);
+
+            if (client == null)
+                return NotFound("Client not found.");
+
+            client.JobsCompleted++;
+            await _context.SaveChangesAsync();
+
+            return Ok(client);
+        }
+
+        public class JobDoneRequest
+        {
+            public required string IPAddress { get; set; }
+            public int Port { get; set; }
+        }
+
     }
 }

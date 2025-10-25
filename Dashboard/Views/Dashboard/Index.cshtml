@@ -1,0 +1,34 @@
+@model List<Dashboard.Controllers.ClientInfo>
+
+@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+<h2>User Informations</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Display Name</th>
+            <th>IP Address</th>
+            <th>Jobs Completed</th>
+            <th>Registered At</th>
+        </tr>
+    </thead>
+    <tbody id="swarmTableBody">
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.DisplayName</td>
+                <td>@client.IPAddress</td>
+                <td>@client.JobsCompleted</td>
+                <td>@client.RegisteredAt</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    setInterval(function () {
+        location.reload();
+    }, 60000); // 1 minute
+</script>
