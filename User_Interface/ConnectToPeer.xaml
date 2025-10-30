@@ -1,0 +1,45 @@
+﻿<Window x:Class="User_Interface.ConnectToPeer"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Connect to Peer"
+        Height="432" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#f8f8f8">
+
+    <Border Padding="20" CornerRadius="10" Background="White" Margin="20" 
+            BorderBrush="#ddd" BorderThickness="1" >
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" >
+
+            <!-- Title -->
+            <TextBlock Text="Peer Connection Setup"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#333"
+                       Margin="0,0,0,20"
+                       TextAlignment="Center"/>
+
+            <!-- Name -->
+            <TextBlock Text="Display Name:" Margin="0,0,0,5"/>
+            <TextBox x:Name="NameTextBox" Height="30" FontSize="14" />
+
+            <!-- IP Address -->
+            <TextBlock Text="IP Address:" Margin="0,15,0,5"/>
+            <TextBox x:Name="IPAddressTextBox" Height="30" FontSize="14" Text="127.0.0.1"/>
+
+            <!-- Port -->
+            <TextBlock Text="Port:" Margin="0,15,0,5"/>
+            <TextBox x:Name="PortTextBox" Height="30" FontSize="14" Text="4555"/>
+
+            <!-- Connect Button -->
+            <Button Content="Connect"
+                    Height="40"
+                    Margin="0,25,0,0"
+                    Background="#0078D7"
+                    Foreground="White"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Click="ConnectButton_Click"/>
+
+        </StackPanel>
+    </Border>
+</Window>

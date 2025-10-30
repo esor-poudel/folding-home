@@ -15,7 +15,7 @@ namespace DesktopClient
         private bool running = true;
         private readonly ServerThread server;
         private readonly string baseUrl = "https://localhost:7194";
-        private readonly string endpoint = "/api/client"; // your POST endpoint
+        private readonly string endpoint = "/api/client"; 
         private readonly RestClient client;
         private readonly string myIp;
         private readonly int myPort;

@@ -52,7 +52,6 @@ namespace WebService.Controllers
 
             client.JobsCompleted++;
             await _context.SaveChangesAsync();
-
             return Ok(client);
         }
 

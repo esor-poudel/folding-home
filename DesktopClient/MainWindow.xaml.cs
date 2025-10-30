@@ -35,25 +35,16 @@ namespace DesktopClient
             _apiHost.Start();
 
 
-            // Subscribe to output event
-            server.JobOutputReceived += OnJobOutputReceived;
 
             // Start server and networking
             // comment this line to get the job remotely 
-            //server.Start();
+            server.Start();
             network.Start();
 
             StatusText.Text = "Client started and registered.";
         }
 
-        private void OnJobOutputReceived(string output)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                StatusText.Text = output;
-                jobsDone++;
-            });
-        }
+      
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {

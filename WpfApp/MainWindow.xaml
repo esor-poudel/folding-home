@@ -1,0 +1,30 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Peer-to-Peer Job Client" Height="350" Width="600">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="PythonCodeTextBox" Grid.Row="0" Grid.Column="0" Height="100" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        <Button x:Name="LoadFileButton" Grid.Row="0" Grid.Column="1" Content="Load from File" Margin="10,0,0,0" Width="120" Click="LoadFileButton_Click"/>
+
+        <Button x:Name="SubmitCodeButton" Grid.Row="1" Grid.Column="0" Content="Submit Python Code" Margin="0,10,0,0" Width="180" Click="SubmitCodeButton_Click"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,10,0,0">
+            <TextBlock Text="Working on job: " FontWeight="Bold"/>
+            <TextBlock x:Name="IsWorkingText" Text="No" Margin="5,0,20,0"/>
+            <TextBlock Text="Jobs completed: " FontWeight="Bold"/>
+            <TextBlock x:Name="JobsCompletedText" Text="0" Margin="5,0,0,0"/>
+        </StackPanel>
+        <Button x:Name="QueryStatusButton" Grid.Row="2" Grid.Column="1" Content="Query Job Status" Margin="10,10,0,0" Width="140" Click="QueryStatusButton_Click"/>
+    </Grid>
+</Window>

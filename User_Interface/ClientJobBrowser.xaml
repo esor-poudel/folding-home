@@ -1,0 +1,68 @@
+﻿<Window x:Class="User_Interface.ClientJobBrowser"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   
+        Title="Client Job Browser" Height="450" Width="500">
+
+
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Button Content="Back"
+      Grid.Row="0"
+      HorizontalAlignment="Left"
+      Margin="0,0,0,5"
+      Width="80"
+      Click="BackButton_Click"/>
+
+
+        <DataGrid x:Name="ClientsDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  Margin="0,0,0,10"
+                  Height="120"
+                  RowHeaderWidth="0"
+                  AlternatingRowBackground="LightGray"
+                  HeadersVisibility="Column"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Client Name" Binding="{Binding DisplayName}" Width="*"/>
+                <DataGridTextColumn Header="Jobs Completed" Binding="{Binding JobsCompleted}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+      
+        <Button Content="Fetch Jobs"
+                Grid.Row="2"
+                Margin="0,10,0,10"
+                Height="30"
+                Width="120"
+                HorizontalAlignment="Left"
+                Click="FetchJobs_Click"/>
+
+        <TextBlock Text="Jobs" FontWeight="Bold" FontSize="16" Margin="0,10,0,5" Grid.Row="3"/>
+        <DataGrid x:Name="JobsDataGrid"
+                  Grid.Row="3"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Margin="0,30,0,0"
+                  RowHeaderWidth="0"
+                  AlternatingRowBackground="LightGray"
+                  HeadersVisibility="Column"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Job ID" Binding="{Binding}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

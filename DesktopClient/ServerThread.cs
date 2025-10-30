@@ -7,7 +7,7 @@ namespace DesktopClient
 {
     public class ServerThread
     {
-        // Change the type of jobQueue from Queue<string> to Queue<JobItem>
+        // Adding the JObItem queue 
         private readonly Queue<JobItem> jobQueue = new();
         private readonly object locker = new();
         private bool running = true;

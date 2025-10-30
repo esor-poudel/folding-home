@@ -1,0 +1,17 @@
+﻿<Window x:Class="User_Interface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="P2P Job Dashboard" Height="400" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Clients:" FontWeight="Bold" />
+        <ListBox x:Name="ClientsListBox" Grid.Row="0" DisplayMemberPath="DisplayName" SelectionMode="Single" />
+        <Button x:Name="FetchJobsButton" Grid.Row="1" Content="Fetch Jobs" Height="30" Margin="0,10,0,10" Click="FetchJobsButton_Click" />
+        <TextBlock Text="Jobs:" Grid.Row="2" FontWeight="Bold" />
+        <ListBox x:Name="JobsListBox" Grid.Row="2" Margin="0,20,0,0" />
+    </Grid>
+</Window>
