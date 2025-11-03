@@ -26,6 +26,8 @@ namespace User_Interface
         public ConnectToPeer()
         {
             InitializeComponent();
+            NetworkingThread networkingThread = new NetworkingThread();
+            networkingThread.Start();
         }
 
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)
@@ -56,20 +58,20 @@ namespace User_Interface
 
             try
             {
-                var clientInfo = new
+                var registrationData = new
                 {
-                    ipAddress = ipAddress,
-                    port = port,
-                    displayName = displayName,
+                    ipAddress,
+                    port,
+                    displayName,
                     jobsCompleted = 0,
                     registeredAt = DateTime.UtcNow
                 };
                 var client = new RestClient("https://localhost:7194");
                 var request = new RestRequest("/api/client", Method.Post);
 
-                request.AddJsonBody(clientInfo);
+                request.AddJsonBody(registrationData);
 
-                var response = await client.ExecuteAsync(request);
+                var response = await client.ExecuteAsync<ClientInfo>(request);
 
                 if (!response.IsSuccessful)
                 {
@@ -78,21 +80,23 @@ namespace User_Interface
                                     "Web Service Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                // Create and start networking thread (host the JobService)
+
+
+
+                var registeredClient = response.Data;
+                // Create and start networking thread 
                 SharedNetworkingThread = new NetworkingThread();
-                SharedNetworkingThread.HostJobServiceForClient(new ServerThread.ClientInfo
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    IPAddress = ipAddress,
-                    Port = port,
-                    DisplayName = displayName,
-                    RegisteredAt = DateTime.UtcNow
-                });
+                SharedNetworkingThread.HostJobServiceForClient(registeredClient);
+
+
 
                 MessageBox.Show($"Peer '{displayName}' hosted at {ipAddress}:{port}",
                                 "Connected", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Open next window (for example JobSubmissionForm)
+
+
+                // open new WCF window when client is connected successfully 
+
                 var jobForm = new JobSubmissionForm(SharedNetworkingThread);
                 jobForm.Show();
                 this.Close();

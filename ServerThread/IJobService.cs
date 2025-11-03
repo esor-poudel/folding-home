@@ -18,10 +18,8 @@ namespace ServerThread
         string GetJobHash(string jobId);
         [OperationContract]
         void SubmitJobResult(string jobId, string result);
-
         [OperationContract]
-
-        void AddJob(string jobTitle, string jobCodeBase64, string jobHash);
+        void AddJob(string jobTitle, string jobCodeBase64);
 
     }
 }

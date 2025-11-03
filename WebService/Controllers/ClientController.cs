@@ -55,6 +55,24 @@ namespace WebService.Controllers
             return Ok(client);
         }
 
+        [HttpGet("ping/{id}")]
+        public async Task<IActionResult> isClientActive(int id)
+        {
+            var client = await _context.Clients.FindAsync(id);
+            if (client == null)
+            {
+                return NotFound("Client not found.");
+            }
+            
+            bool isActive = client.RegisteredAt.AddMinutes(5) > DateTime.UtcNow;
+            if(isActive)
+            {
+                client.RegisteredAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+            }
+            return Ok(isActive);
+        }
+
         public class JobDoneRequest
         {
             public required string IPAddress { get; set; }

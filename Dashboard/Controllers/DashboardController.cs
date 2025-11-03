@@ -20,9 +20,9 @@ namespace Dashboard.Controllers
                 if (result != null)
                     clients = result;
             }
-            catch
+            catch(HttpRequestException)
             {
-                // Handle error (e.g., log or show message)
+                
             }
             return View(clients);
         }

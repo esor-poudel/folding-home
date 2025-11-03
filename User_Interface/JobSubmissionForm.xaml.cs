@@ -56,25 +56,21 @@ namespace User_Interface
                 return;
             }
 
-            var jobService = networkingThread.LocalJobService;
-            //var jobService = networkingThread.ConnectToJobService("127.0.0.1", 4883);
+            var jobService = networkingThread.ConnectToJobService(networkingThread.MyIp, networkingThread.MyPort);
+
+
             if (jobService == null)
             {
                 MessageBox.Show("Could not connect to the selected client.");
                 return;
             }
 
-
             // Submit the job 
-
-            string jobCodeBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(code));
-            string jobHash = ServerThread.NetworkingThread.GetSha256Hash(jobCodeBase64);
-            jobService.AddJob(jobTitle, jobCodeBase64, jobHash);
+            
+            jobService.AddJob(jobTitle, code);
             MessageBox.Show("Job submitted successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
-
-        
 
         private void btnFetchJobs_Click(object sender, RoutedEventArgs e)
         {
@@ -84,5 +80,3 @@ namespace User_Interface
         }
     }
 }
-
-

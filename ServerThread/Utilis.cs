@@ -1,6 +1,9 @@
-﻿using System;
+﻿using IronPython.Hosting;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,11 +13,7 @@ namespace ServerThread
     {
         public static class Cryptography
         {
-            public static string ToBase64(string plainText)
-            {
-                var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-                return Convert.ToBase64String(plainTextBytes);
-            }
+          
 
             public static string FromBase64(string base64EncodedData)
             {
@@ -31,6 +30,22 @@ namespace ServerThread
                     return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
                 }
             }
+
+
+
+            public static async Task<RestResponse> JobDoneAsync(string ipAddress, int port)
+            {
+                var jobDone = new { IPAddress = ipAddress, Port = port };
+                var client = new RestClient("https://localhost:7194");
+                var request = new RestRequest("/api/client/jobdone", Method.Post);
+                request.AddJsonBody(jobDone);
+                return await client.ExecuteAsync(request);
+            }
+
+
+           
+
+
         }
     }
 }
